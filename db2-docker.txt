@@ -38,7 +38,7 @@ inside bash command in docker container
     create database testdb1
     create schema wscomusr
 
-Use dbeaver in local machien to connect to db2.
+Use dbeaver in local machine to connect to db2.
 
 CREATE TABLE wscomusr.catentry (
 	CATENTRY_ID BIGINT NOT NULL,
@@ -53,5 +53,19 @@ insert a sample data
 INSERT INTO WSCOMUSR.CATENTRY VALUES ( 1,1,
 'catentry 1',
 CURRENT timestamp);
+
+actual table script
+---
+
+
+INSERT INTO DB2ADMIN.CATENTRY
+(CATENTRY_ID, MEMBER_ID, ITEMSPC_ID, CATENTTYPE_ID, PARTNUMBER, MFPARTNUMBER, MFNAME, 
+MARKFORDELETE, URL, FIELD1, FIELD2, LASTUPDATE, FIELD3, ONSPECIAL, ONAUCTION, 
+FIELD4, FIELD5, BUYABLE, OID, BASEITEM_ID, STATE, STARTDATE, ENDDATE, "RANK", 
+OPTCOUNTER, AVAILABILITYDATE, LASTORDERDATE, ENDOFSERVICEDATE, DISCONTINUEDATE)
+VALUES(0, 0, 0, '', '', '', '',
+0, '', 0, 0, CURRENT timestamp, 0, 0, 0, 
+'', '', 0, '', 0, '1', CURRENT timestamp, CURRENT timestamp,0, 
+0,CURRENT timestamp , CURRENT timestamp , CURRENT timestamp , CURRENT timestamp );
 
 
