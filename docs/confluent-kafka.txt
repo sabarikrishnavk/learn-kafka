@@ -1,0 +1,43 @@
+
+Refer:  https://github.com/confluentinc/demo-scene/blob/master/kafka-connect-zero-to-hero/docker-compose.yml
+
+Refer : https://developer.confluent.io/quickstart/kafka-docker/
+
+Download the docker-compose.yml
+
+To start cluster
+
+docker-compose up -d
+docker-compose down -d
+
+to check connector plugins
+
+
+curl http://localhost:8083/connector-plugins|jq
+
+
+To listen to db2 
+ 
+curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
+        "name": "jdbc_source_db2_02",
+        "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+                "connection.url": "jdbc:db2://host.docker.internal:50000/testdb",
+                "connection.user": "db2inst1",
+                "connection.password": "password",
+                "topic.prefix": "db2-02-catentry",
+                "mode":"timestamp",
+                "query":"SELECT CATENTRY_ID, MEMBER_ID, PARTNUMBER, LASTUPDATE FROM WSCOMUSR.CATENTRY ",
+                "timestamp.column.name": "LASTUPDATE",
+                "validate.non.null": false
+                }
+        }'
+
+
+To delete: 
+
+curl -X DELETE http://localhost:8083/connectors/jdbc_source_db2_02
+
+
+to check the messages in topic
+http://localhost:9021/

@@ -1,0 +1,82 @@
+
+
+ 
+
+## Local docker
+
+
+Following steps to run db2 docker in local
+
+Refer:  https://www.ibm.com/docs/en/db2/11.5?topic=SSEPGG_11.5.0/com.ibm.db2.luw.qb.server.doc/doc/t_install_db2CE_win_img.htm
+
+
+
+
+create a folder /docker/db2
+
+cd /docker/db2
+
+vi .env_list
+
+Copy the following key values to the visual editor
+ 
+LICENSE=accept
+DB2INSTANCE=db2inst1
+DB2INST1_PASSWORD=password
+DBNAME=testdb
+BLU=false
+ENABLE_ORACLE_COMPATIBILITY=false
+UPDATEAVAIL=NO
+TO_CREATE_SAMPLEDB=false
+REPODB=false
+IS_OSXFS=false
+PERSISTENT_HOME=false
+HADR_ENABLED=false
+ETCD_ENDPOINT=
+ETCD_USERNAME=
+ETCD_PASSWORD=
+
+To save the file
+esc :wq!
+
+docker run -h db2server --name db2server --restart=always --detach --privileged=true -p 50000:50000 --env-file .env_list -v /docker/db2:/database ibmcom/db2
+
+docker exec -ti db2server bash 
+
+
+inside bash command in docker container
+    su – db2inst1
+    create database testdb1
+    create schema wscomusr
+
+Use dbeaver in local machine to connect to db2.
+
+CREATE TABLE wscomusr.catentry (
+	CATENTRY_ID BIGINT NOT NULL,
+	MEMBER_ID BIGINT NOT NULL,
+	PARTNUMBER 	VARCHAR (64) NOT NULL,
+	LASTUPDATE TIMESTAMP
+); 
+
+insert a sample data
+
+
+INSERT INTO WSCOMUSR.CATENTRY VALUES ( 1,1,
+'catentry 1',
+CURRENT timestamp);
+
+actual table script
+---
+
+
+INSERT INTO DB2ADMIN.CATENTRY
+(CATENTRY_ID, MEMBER_ID, ITEMSPC_ID, CATENTTYPE_ID, PARTNUMBER, MFPARTNUMBER, MFNAME, 
+MARKFORDELETE, URL, FIELD1, FIELD2, LASTUPDATE, FIELD3, ONSPECIAL, ONAUCTION, 
+FIELD4, FIELD5, BUYABLE, OID, BASEITEM_ID, STATE, STARTDATE, ENDDATE, "RANK", 
+OPTCOUNTER, AVAILABILITYDATE, LASTORDERDATE, ENDOFSERVICEDATE, DISCONTINUEDATE)
+VALUES(0, 0, 0, '', '', '', '',
+0, '', 0, 0, CURRENT timestamp, 0, 0, 0, 
+'', '', 0, '', 0, '1', CURRENT timestamp, CURRENT timestamp,0, 
+0,CURRENT timestamp , CURRENT timestamp , CURRENT timestamp , CURRENT timestamp );
+
+

@@ -1,0 +1,47 @@
+---
+version: '2'
+services:
+  elasticsearch:
+    container_name: elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /Users/sabari/Documents/workspace/mach-alliance/learn-kafka/es/
+  db2:
+    container_name: db2
+    image: ibmcom/db2
+    ports:
+      - 50000:50000
+    privileged: true
+
+    environment:
+      - LICENSE=accept
+      - DB2INSTANCE=db2inst1
+      - DB2INST1_PASSWORD=password
+      - DBNAME=testdb
+      - BLU=false
+      - ENABLE_ORACLE_COMPATIBILITY=false
+      - UPDATEAVAIL=NO
+      - TO_CREATE_SAMPLEDB=false
+      - REPODB=false
+      - IS_OSXFS=false
+      - PERSISTENT_HOME=false
+      - HADR_ENABLED=false
+      - ETCD_ENDPOINT=
+      - ETCD_USERNAME=
+      - ETCD_PASSWORD=
+    volumes:
+      - /Users/sabari/Documents/workspace/mach-alliance/learn-kafka/db2/
+    restart: always

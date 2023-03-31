@@ -1,0 +1,12 @@
+Insert data into table
+
+INSERT INTO WSCOMUSR.CATENTRY VALUES ( 
+(SELECT max(CATENTRY_ID)+1 FROM WSCOMUSR.CATENTRY), 
+(SELECT max(CATENTRY_ID)+1 FROM WSCOMUSR.CATENTRY),
+'catentry '||(SELECT max(CATENTRY_ID)+1 FROM WSCOMUSR.CATENTRY),
+CURRENT timestamp);
+
+
+Check the messages in topic
+
+http://localhost:9021/

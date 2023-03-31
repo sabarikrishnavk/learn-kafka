@@ -1,0 +1,91 @@
+SET 'auto.offset.reset' = 'earliest';
+-- CREATE TABLE ATTR_ALL (
+--     ID VARCHAR PRIMARY KEY,
+--     ATTR_ID bigint,
+--     ATTRVAL_ID bigint,
+--     LANGUAGE_ID bigint,
+--     ATTRIDENTIFIER VARCHAR,
+--     ATTRTYPE_ID VARCHAR,
+--     ATTRDICT_ID bigint,
+--     STOREENT_ID bigint,
+--     ATTRSEQUENCE double,
+--     DISPLAYABLE bigint,
+--     SEARCHABLE bigint,
+--     COMPARABLE bigint,
+--     ATTRUSAGE bigint,
+--     STOREDISPLAY bigint,
+--     FACETABLE bigint,
+--     MERCHANDISABLE bigint,
+--     SWATCHABLE bigint,
+--     VALIDENTIFIER VARCHAR,
+--     VALUSAGE bigint,
+--     VALVALUE VARCHAR,
+--     VALSEQUENCE double,
+--     STRINGVALUE VARCHAR,
+--     INTEGERVALUE bigint,
+--     FLOATVALUE double,
+--     QTYUNIT_ID VARCHAR
+-- ) WITH (
+--     KAFKA_TOPIC = 'db2_attr_all',
+--     VALUE_FORMAT = 'AVRO',
+--     KEY_FORMAT = 'KAFKA',
+--     PARTITIONS = 1
+-- );
+CREATE TABLE ATTR_JSON (
+    ID VARCHAR PRIMARY KEY,
+    ATTR_ID bigint,
+    ATTRVAL_ID bigint,
+    LANGUAGE_ID bigint,
+    ATTRIDENTIFIER VARCHAR,
+    ATTRTYPE_ID VARCHAR,
+    ATTRDICT_ID bigint,
+    STOREENT_ID bigint,
+    ATTRSEQUENCE double,
+    DISPLAYABLE bigint,
+    SEARCHABLE bigint,
+    COMPARABLE bigint,
+    ATTRUSAGE bigint,
+    STOREDISPLAY bigint,
+    FACETABLE bigint,
+    MERCHANDISABLE bigint,
+    SWATCHABLE bigint,
+    VALIDENTIFIER VARCHAR,
+    VALUSAGE bigint,
+    VALVALUE VARCHAR,
+    VALSEQUENCE double,
+    STRINGVALUE VARCHAR,
+    INTEGERVALUE bigint,
+    FLOATVALUE double,
+    QTYUNIT_ID VARCHAR
+) WITH (
+    KAFKA_TOPIC = 'db2_attr_json',
+    VALUE_FORMAT = 'JSON',
+    KEY_FORMAT = 'KAFKA',
+    PARTITIONS = 1
+);
+--drop table attr;
+-- CREATE TABLE ATTR (
+--     ATTR_ID VARCHAR PRIMARY KEY,
+--     IDENTIFIER VARCHAR,
+--     ATTRTYPE_ID VARCHAR,
+--     ATTRDICT_ID bigint,
+--     STOREENT_ID bigint,
+--     SEQUENCE double,
+--     DISPLAYABLE bigint,
+--     SEARCHABLE bigint,
+--     COMPARABLE bigint,
+--     FIELD1 bigint,
+--     FIELD2 bigint,
+--     FIELD3 VARCHAR,
+--     OPTCOUNTER bigint,
+--     ATTRUSAGE bigint,
+--     STOREDISPLAY bigint,
+--     FACETABLE bigint,
+--     MERCHANDISABLE bigint,
+--     SWATCHABLE bigint
+-- ) WITH (
+--     KAFKA_TOPIC = 'db2_attr',
+--     VALUE_FORMAT = 'AVRO',
+--     KEY_FORMAT = 'KAFKA',
+--     PARTITIONS = 1
+-- );
