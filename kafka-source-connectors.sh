@@ -75,7 +75,7 @@ db2_catentry_attribute()
       "value.converter.schemas.enable": "false",
       "transforms": "createKey",
       "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-      "transforms.createKey.fields" : "PARTNUMBER, ATTR_ID" 
+      "transforms.createKey.fields" : "PARTNUMBER" 
     }
   }
 EOF

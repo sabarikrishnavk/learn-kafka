@@ -24,7 +24,7 @@ select PARTNUMBER AS ID,
                       
         ],
                     ARRAY [
-                        CAST (attr_id AS STRING),
+                        CAST (attr_name AS STRING),
                         CAST (attr_value AS STRING)
                      
         ]
