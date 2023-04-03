@@ -1,7 +1,7 @@
 SET 'auto.offset.reset' = 'earliest';
 CREATE STREAM productattr_stream (
     PARTNUMBER VARCHAR,
-    attr_id VARCHAR,
+    attr_name VARCHAR,
     attr_value VARCHAR,
     LASTUPDATE VARCHAR
 ) WITH (
