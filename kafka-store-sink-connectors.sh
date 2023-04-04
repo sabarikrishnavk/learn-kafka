@@ -4,17 +4,17 @@
 #          curl
 
 # elasticsearch-sink 
-elasticsearch_sink()
+stores_es_sink()
 {
   cat <<EOF
   {
-    "name": "elasticsearch_sink",
+    "name": "stores_es_sink",
     "config": {
       "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
       "tasks.max": "1",
       "connection.url": "http://host.docker.internal:9200",
       "type.name": "_doc",
-      "name": "elasticsearch_sink",
+      "name": "stores_es_sink",
       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
       "key.converter.schemas.enable": "false",
       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
@@ -23,27 +23,23 @@ elasticsearch_sink()
       "schema.ignore": "true",
       "write.method" : "UPSERT",
       "auto.create.indices.at.start": "false"  ,
-      "topics": "db2.product.details, db2.product.attributemap", 
-      "transforms": "TimestampConverter,createKey,extractKey,renameTopic",
-      "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter\$Value",
-      "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss",
-      "transforms.TimestampConverter.field": "LASTUPDATE",
-      "transforms.TimestampConverter.target.type": "string",    
+      "topics": "db2.store.details, db2.store.attributemap", 
+      "transforms": "createKey,extractKey,renameTopic",   
       "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-      "transforms.createKey.fields": "PARTNUMBER",
+      "transforms.createKey.fields": "IDENTIFIER",
       "transforms.extractKey.type": "org.apache.kafka.connect.transforms.ExtractField\$Key",
-      "transforms.extractKey.field": "PARTNUMBER" ,
+      "transforms.extractKey.field": "IDENTIFIER" ,
       "transforms.renameTopic.type": "org.apache.kafka.connect.transforms.RegexRouter", 
-      "transforms.renameTopic.regex": "db2.product.*",
-      "transforms.renameTopic.replacement": "products"  
+      "transforms.renameTopic.regex": "db2.store.*",
+      "transforms.renameTopic.replacement": "stores"  
     }
   } 
 EOF
 }
 
 
-curl -X DELETE http://localhost:8083/connectors/elasticsearch_sink
+curl -X DELETE http://localhost:8083/connectors/stores_es_sink
 # Configure kafka connect : elasticsearch_sink
 curl -i \
 -H "Content-Type:application/json" \
--X POST --data "$(elasticsearch_sink)" "http://localhost:8083/connectors"
+-X POST --data "$(stores_es_sink)" "http://localhost:8083/connectors"

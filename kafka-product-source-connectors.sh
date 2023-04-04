@@ -3,11 +3,11 @@
 # Prereqs: docker-compose
 #          curl
 
-db2_catentry_details()
+db2_product_details()
 {
   cat <<EOF
   {
-    "name": "db2_catentry_details",
+    "name": "db2_product_details",
     "config": {
       "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
       "connection.url": "jdbc:db2://host.docker.internal:50000/testdb",
@@ -31,18 +31,18 @@ db2_catentry_details()
   }
 EOF
 } 
-curl -X DELETE http://localhost:8083/connectors/db2_catentry_details
+curl -X DELETE http://localhost:8083/connectors/db2_product_details
 # Configure kafka connect : db2_catentry
 curl -i \
 -H "Content-Type:application/json" \
--X POST --data "$(db2_catentry_details)" "http://localhost:8083/connectors"
+-X POST --data "$(db2_product_details)" "http://localhost:8083/connectors"
 
  
-db2_catentry_attribute()
+db2_product_attribute()
 {
   cat <<EOF
   {
-    "name": "db2_catentry_attribute",
+    "name": "db2_product_attribute",
     "config": {
       "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
       "connection.url": "jdbc:db2://host.docker.internal:50000/testdb",
@@ -82,9 +82,9 @@ EOF
 }
 
 
-curl -X DELETE http://localhost:8083/connectors/db2_catentry_attribute
-# Configure kafka connect : db2_catentry
+curl -X DELETE http://localhost:8083/connectors/db2_product_attribute
+# Configure kafka connect : db2_product_attribute
 curl -i \
 -H "Content-Type:application/json" \
--X POST --data "$(db2_catentry_attribute)" "http://localhost:8083/connectors"
+-X POST --data "$(db2_product_attribute)" "http://localhost:8083/connectors"
  
