@@ -19,15 +19,11 @@ select PARTNUMBER AS ID,
             CAST(
                 AS_MAP(
                     ARRAY [
-                        'key',
-                        'value'
-                      
-        ],
+                        'name', 'value'
+                    ],
                     ARRAY [
-                        CAST (attr_name AS STRING),
-                        CAST (attr_value AS STRING)
-                     
-        ]
+                        CAST (attr_name AS STRING), CAST (attr_value AS STRING)
+                    ]
                 ) AS STRING
             )
         ),

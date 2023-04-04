@@ -18,15 +18,12 @@ select IDENTIFIER AS ID,
             CAST(
                 AS_MAP(
                     ARRAY [
-                        'key',
-                        'value'
+                        'name', 'value'
                       
-        ],
+                    ],
                     ARRAY [
-                        CAST (name AS STRING),
-                        CAST (value AS STRING)
-                     
-        ]
+                        CAST (name AS STRING), CAST (value AS STRING) 
+                    ]
                 ) AS STRING
             )
         ),

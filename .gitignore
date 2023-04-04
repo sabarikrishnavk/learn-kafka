@@ -1,3 +1,7 @@
 db2
 es
 test
+.DS_Store
+scripts/03-01-stloc.sql
+scripts/03-02-stlocattr.sql
+scripts/03-02-stlocds.sql

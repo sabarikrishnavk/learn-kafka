@@ -15,7 +15,11 @@ db2_store_details()
       "connection.password": "password",
       "topic.prefix": "db2.store.details",
       "mode":"bulk",
-      "query":"SELECT IDENTIFIER ,PHONE , ADDRESS1  , city , STATE  , COUNTRY  , ZIPCODE  , CAST (LATITUDE AS VARCHAR) AS  LATITUDE,CAST (LONGITUDE AS VARCHAR) AS  LONGITUDE   FROM DB2ADMIN.STLOC ",
+      "query":"SELECT STLOC.IDENTIFIER ,STLOC.PHONE , STLOC.ADDRESS1  , STLOC.city , STLOC.STATE  , \
+            STLOC.COUNTRY  , STLOC.ZIPCODE  , CAST (STLOC.LATITUDE AS VARCHAR) AS  LATITUDE, \
+            CAST (STLOC.LONGITUDE AS VARCHAR) AS  LONGITUDE  , LOCDS.NAME , LOCDS.DESCRIPTION \
+            FROM DB2ADMIN.STLOC STLOC , DB2ADMIN.STLOCDS LOCDS \
+            WHERE STLOC.STLOC_ID  = LOCDS.STLOC_ID ",
       "validate.non.null": false,
       "key.converter": "org.apache.kafka.connect.json.JsonConverter",
       "key.converter.schemas.enable": "false",
